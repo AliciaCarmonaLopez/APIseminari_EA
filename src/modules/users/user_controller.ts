@@ -13,7 +13,7 @@ export const saveMethodHandler = async (req: Request, res: Response) => {
 };
 export const createUserHandler = async (req: Request, res: Response) => {
     try {
-        const data = await createUser(req.body);
+        const data = await createUser(req.body); // paràmetres que van al cos en format json
         res.json(data);
     } catch (error: any) {
         res.status(500).json({ message: error.message });
@@ -29,7 +29,7 @@ export const getAllUsersHandler = async (req: Request, res: Response) => {
 };
 export const getUserByIdHandler = async (req: Request, res: Response) => {
     try {
-        const data = await getUserById(req.params.id);
+        const data = await getUserById(req.params.id); //paràmetres que van a la url
         res.json(data);
     } catch (error: any) {
         res.status(500).json({ message: error.message });

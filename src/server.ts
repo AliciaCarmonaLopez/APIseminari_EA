@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRoutes from './modules/users/user_routes.js'; // Nota el .js al final
 import forumRoutes from './modules/forum/forum_routes.js'; // Nota el .js al final
+import subjectRoutes from './modules/subjects/subject_routes.js'; // Nota el .js al final
 import { corsHandler } from './middleware/corsHandler.js';
 import { loggingHandler } from './middleware/loggingHandler.js';
 import { routeNotFound } from './middleware/routeNotFound.js';
@@ -26,6 +27,10 @@ const swaggerOptions = {
         },
         tags: [
             {
+                name: 'Subjects',
+                description: 'Rutas relacionadas con la gestión de materias',
+            },
+            {
               name: 'Users',
               description: 'Rutas relacionadas con la gestión de usuarios',
             },
@@ -44,7 +49,7 @@ const swaggerOptions = {
             }
         ]
     },
-    apis: ['./modules/users/*.js', './modules/forum/*.js'] // Asegúrate de que esta ruta apunta a tus rutas
+    apis: ['./modules/users/*.js', './modules/forum/*.js', './modules/subjects/*.js'] // Asegúrate de que esta ruta apunta a tus rutas
 };
 
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
@@ -58,6 +63,8 @@ app.use(corsHandler);
 //rutas
 app.use('/api', userRoutes);
 app.use('/api', forumRoutes);
+app.use('/api', subjectRoutes);
+app.use(routeNotFound);
 // Rutes de prova
 app.get('/', (req, res) => {
     res.send('Welcome to my API');
